@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACKZIN UI V2.1 - PREMIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff003c;
+            --primary-glow: rgba(255, 0, 60, 0.5);
+            --bg-deep: #050505;
+            --glass-bg: rgba(15, 15, 15, 0.9);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-dim: #888;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-deep);
+            background-image: radial-gradient(circle at center, #1a0505 0%, #050505 100%);
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; color: var(--text-main); overflow: hidden;
+        }
+
+        .window {
+            width: 380px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .window::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center; font-size: 24px;
+            margin-bottom: 30px; letter-spacing: 3px;
+            color: var(--primary); text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label {
+            display: block; font-size: 12px; text-transform: uppercase;
+            color: var(--text-dim); margin-bottom: 8px;
+        }
+
+        input[type="password"], select {
+            width: 100%; background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color); padding: 12px;
+            border-radius: 8px; color: #fff; outline: none; box-sizing: border-box;
+        }
+
+        input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--primary-glow); }
+
+        input[type="range"] {
+            -webkit-appearance: none; width: 100%; height: 4px;
+            background: #222; border-radius: 5px; outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 18px; height: 18px;
+            background: var(--primary); border-radius: 50%; cursor: pointer;
+        }
+
+        .toggle-container {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.03); padding: 12px;
+            border-radius: 10px; margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .btn-main {
+            width: 100%; padding: 15px;
+            background: linear-gradient(45deg, #b3002b, var(--primary));
+            border: none; color: white; font-family: 'Orbitron', sans-serif;
+            border-radius: 10px; cursor: pointer; transition: 0.3s;
+            margin-top: 10px; text-transform: uppercase; font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-top: 15px;
+        }
+
+        .btn-main:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary-glow); }
+        .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); }
+
+        #painel { display: none; }
+        .val-indicator { color: var(--primary); font-weight: bold; }
+
+        #error-msg {
+            color: var(--primary);
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="window" id="menuKey">
+    <h1>BLACKZIN <span style="font-weight:300; color: #fff;">V2</span></h1>
+    
+    <div class="input-group">
+        <label>Chave de Acesso</label>
+        <input type="password" id="keyInput" placeholder="Insira sua licença...">
+    </div>
+
+    <button class="btn-main" onclick="verificarKey()">Acessar Painel</button>
+
+    <a href="https://SEULINKAQUI.com" target="_blank" style="text-decoration: none;">
+        <button class="btn-main btn-secondary">Gerar Key</button>
+    </a>
+
+    <p id="error-msg"></p>
+</div>
+
+<div class="window" id="painel">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <span style="font-size: 12px; color: #00ff00;">● SISTEMA ATIVO</span>
+        <span style="font-size: 12px; color: var(--text-dim);">PREMIUM V2.1</span>
+    </div>
+
+    <h1>CONTROLE</h1>
+
+    <div class="toggle-container">
+        <span>Mira Estável (Smooth)</span>
+        <input type="checkbox" checked style="accent-color: var(--primary);">
+    </div>
+
+    <div class="input-group">
+        <div style="display: flex; justify-content: space-between;">
+            <label>Intensidade Estabilidade</label>
+            <span class="val-indicator" id="stabVal">80%</span>
+        </div>
+        <input type="range" min="0" max="100" value="80" oninput="document.getElementById('stabVal').innerText = this.value + '%'">
+    </div>
+
+    <div class="input-group">
+        <div style="display: flex; justify-content: space-between;">
+            <label>Campo de Visão (FOV)</label>
+            <span class="val-indicator" id="fovVal">70</span>
+        </div>
+        <input type="range" min="1" max="180" value="70" oninput="document.getElementById('fovVal').innerText = this.value">
+    </div>
+
+    <div class="input-group">
+        <label>Prioridade de Alvo</label>
+        <select>
+            <option>Cabeça</option>
+            <option>Pescoço</option>
+            <option>Peito</option>
+        </select>
+    </div>
+
+    <button class="btn-main" id="injectBtn" onclick="injetar()">Injetar Configurações</button>
+</div>
+
+<script>
+    function verificarKey() {
+        const input = document.getElementById("keyInput").value;
+        const error = document.getElementById("error-msg");
+        
+        // SENHA FIXA AQUI
+        if(input === "BLACKZIN123") {
+            document.getElementById("menuKey").style.display = "none";
+            document.getElementById("painel").style.display = "block";
+        } else {
+            error.innerText = "CHAVE INVÁLIDA!";
+            setTimeout(() => { error.innerText = ""; }, 3000);
+        }
+    }
+
+    function injetar() {
+        const btn = document.getElementById("injectBtn");
+        btn.innerText = "ESTABILIZANDO...";
+        btn.disabled = true;
+        btn.style.opacity = "0.6";
+        
+        setTimeout(() => {
+            btn.innerText = "CONFIGURAÇÕES ATIVAS!";
+            btn.style.background = "#00ff4c";
+            btn.style.color = "#000";
+            btn.style.opacity = "1";
+        }, 2000);
+    }
+</script>
+
+</body>
+  </html>
