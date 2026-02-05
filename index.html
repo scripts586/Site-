@@ -1,202 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACKZIN UI V2.1 - PREMIUM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff003c;
-            --primary-glow: rgba(255, 0, 60, 0.5);
-            --bg-deep: #050505;
-            --glass-bg: rgba(15, 15, 15, 0.9);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-main: #e0e0e0;
-            --text-dim: #888;
-        }
+<meta charset="UTF-8">
+<title>BLACKZIN CHEATS PAINEL V3</title>
 
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--bg-deep);
-            background-image: radial-gradient(circle at center, #1a0505 0%, #050505 100%);
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; color: var(--text-main); overflow: hidden;
-        }
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#000;
+    color:white;
+}
 
-        .window {
-            width: 380px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
-            position: relative;
-        }
+.container{
+    max-width:360px;
+    margin:30px auto;
+    border:2px solid red;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 0 15px red;
+}
 
-        .window::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-        }
+h1,h2{
+    text-align:center;
+    color:red;
+    text-shadow:0 0 10px red;
+}
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center; font-size: 24px;
-            margin-bottom: 30px; letter-spacing: 3px;
-            color: var(--primary); text-shadow: 0 0 10px var(--primary-glow);
-        }
+.section{
+    border:2px solid red;
+    border-radius:12px;
+    padding:10px;
+    margin-bottom:12px;
+}
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label {
-            display: block; font-size: 12px; text-transform: uppercase;
-            color: var(--text-dim); margin-bottom: 8px;
-        }
+button{
+    width:100%;
+    padding:15px;
+    background:red;
+    border:none;
+    color:white;
+    font-size:15px;
+    border-radius:12px;
+    margin-top:10px;
+    cursor:pointer;
+    box-shadow:0 0 10px red;
+}
 
-        input[type="password"], select {
-            width: 100%; background: rgba(0,0,0,0.5);
-            border: 1px solid var(--border-color); padding: 12px;
-            border-radius: 8px; color: #fff; outline: none; box-sizing: border-box;
-        }
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:8px;
+    border:none;
+}
 
-        input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--primary-glow); }
+#painel, #sensiBox{
+    display:none;
+}
 
-        input[type="range"] {
-            -webkit-appearance: none; width: 100%; height: 4px;
-            background: #222; border-radius: 5px; outline: none;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 18px; height: 18px;
-            background: var(--primary); border-radius: 50%; cursor: pointer;
-        }
+.value{
+    color:red;
+    float:right;
+}
 
-        .toggle-container {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.03); padding: 12px;
-            border-radius: 10px; margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .btn-main {
-            width: 100%; padding: 15px;
-            background: linear-gradient(45deg, #b3002b, var(--primary));
-            border: none; color: white; font-family: 'Orbitron', sans-serif;
-            border-radius: 10px; cursor: pointer; transition: 0.3s;
-            margin-top: 10px; text-transform: uppercase; font-weight: bold;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            margin-top: 15px;
-        }
-
-        .btn-main:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary-glow); }
-        .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); }
-
-        #painel { display: none; }
-        .val-indicator { color: var(--primary); font-weight: bold; }
-
-        #error-msg {
-            color: var(--primary);
-            text-align: center;
-            font-size: 14px;
-            margin-top: 10px;
-            height: 20px;
-        }
-    </style>
+a{
+    color:white;
+    text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
-<div class="window" id="menuKey">
-    <h1>BLACKZIN <span style="font-weight:300; color: #fff;">V2</span></h1>
-    
-    <div class="input-group">
-        <label>Chave de Acesso</label>
-        <input type="password" id="keyInput" placeholder="Insira sua licença...">
+<!-- MENU KEY -->
+<div class="container" id="menuKey">
+    <h1>BLACKZIN CHEATS</h1>
+
+    <div class="section">
+        <label>Digite sua Key:</label>
+        <input type="password" id="keyInput" placeholder="Digite a key">
     </div>
 
-    <button class="btn-main" onclick="verificarKey()">Acessar Painel</button>
+    <button onclick="verificarKey()">VALIDAR KEY</button>
+    <button onclick="gerarKey()">GERAR KEY</button>
 
-    <a href="https://fir3.net/Keyblackzin" target="_blank" style="text-decoration: none;">
-        <button class="btn-main btn-secondary">Gerar Key</button>
-    </a>
+    <p id="msg" style="text-align:center;color:red;"></p>
 
-    <p id="error-msg"></p>
-</div>
-
-<div class="window" id="painel">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-        <span style="font-size: 12px; color: #00ff00;">● SISTEMA ATIVO</span>
-        <span style="font-size: 12px; color: var(--text-dim);">PREMIUM V2.1</span>
-    </div>
-
-    <h1>CONTROLE</h1>
-
-    <div class="toggle-container">
-        <span>Mira Estável (Smooth)</span>
-        <input type="checkbox" checked style="accent-color: var(--primary);">
-    </div>
-
-    <div class="input-group">
-        <div style="display: flex; justify-content: space-between;">
-            <label>Intensidade Estabilidade</label>
-            <span class="val-indicator" id="stabVal">80%</span>
-        </div>
-        <input type="range" min="0" max="100" value="80" oninput="document.getElementById('stabVal').innerText = this.value + '%'">
-    </div>
-
-    <div class="input-group">
-        <div style="display: flex; justify-content: space-between;">
-            <label>Campo de Visão (FOV)</label>
-            <span class="val-indicator" id="fovVal">70</span>
-        </div>
-        <input type="range" min="1" max="180" value="70" oninput="document.getElementById('fovVal').innerText = this.value">
-    </div>
-
-    <div class="input-group">
-        <label>Prioridade de Alvo</label>
+    <div class="section">
+        <h2>🌐 Idioma</h2>
         <select>
-            <option>Cabeça</option>
-            <option>Pescoço</option>
-            <option>Peito</option>
+            <option>Português</option>
+            <option>English</option>
         </select>
     </div>
 
-    <button class="btn-main" id="injectBtn" onclick="injetar()">Injetar Configurações</button>
+    <div class="section">
+        <h2>ℹ️ Informações</h2>
+        <p>Versão: V3.0</p>
+        <p>Créditos: BLACKZIN</p>
+        <p>
+            Discord:
+            <a href="https://discord.gg/EsWb49X5UC" target="_blank">
+                Entrar no servidor
+            </a>
+        </p>
+    </div>
+</div>
+
+<!-- PAINEL -->
+<div class="container" id="painel">
+    <h1>BLACKZIN CHEATS PAINEL V3</h1>
+
+    <div class="section">
+        <label><input type="checkbox"> Ativar Auxílio</label>
+    </div>
+
+    <div class="section">
+        <label><input type="checkbox"> Auxílio Extra</label>
+    </div>
+
+    <div class="section">
+        <label><input type="checkbox"> Ativar FOV</label>
+    </div>
+
+    <div class="section">
+        Campo de visão: <span class="value">5</span>
+        <input type="range" min="1" max="10" value="5"
+        oninput="this.previousElementSibling.innerText=this.value">
+    </div>
+
+    <div class="section">
+        Tipo de Auxílio:
+        <select>
+            <option>Cabeça Auxiliar</option>
+            <option>Peito</option>
+            <option>Corpo</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <button onclick="mostrarSensi()">📌 MOSTRAR SENSI</button>
+    </div>
+
+    <div class="section" id="sensiBox">
+        <h2>SENSI RECOMENDADA</h2>
+        <p>🎯 Geral: 95%</p>
+        <p>🔫 Red Dot: 90%</p>
+        <p>🔭 Mira 2x: 85%</p>
+        <p>🔭 Mira 4x: 75%</p>
+        <p>🎯 AWM: 60%</p>
+        <p>📱 DPI: 600 - 700</p>
+    </div>
+
+    <button onclick="injetar()">INJETAR FUNÇÕES NO JOGO</button>
+
+    <div class="section">
+        <h2>ℹ️ Info</h2>
+        <p>Versão: V3.0</p>
+        <p>Créditos: BLACKZIN</p>
+        <p>
+            Discord:
+            <a href="https://discord.gg/EsWb49X5UC" target="_blank">
+                Entrar no servidor
+            </a>
+        </p>
+    </div>
+
+    <button onclick="logout()">SAIR / RESETAR KEY</button>
 </div>
 
 <script>
-    function verificarKey() {
-        const input = document.getElementById("keyInput").value;
-        const error = document.getElementById("error-msg");
-        
-        // SENHA FIXA AQUI
-        if(input === "BLACKZIN123") {
-            document.getElementById("menuKey").style.display = "none";
-            document.getElementById("painel").style.display = "block";
+let keyCorreta = "BLACKZIN123";
+let tempoExpiracao = 24 * 60 * 60 * 1000; // 24h
+
+// verificar key salva ao abrir
+window.onload = function(){
+    let keySalva = localStorage.getItem("keySalva");
+    let tempoSalvo = localStorage.getItem("tempoKey");
+
+    if(keySalva && tempoSalvo){
+        let agora = new Date().getTime();
+
+        if(agora - tempoSalvo < tempoExpiracao){
+            document.getElementById("menuKey").style.display="none";
+            document.getElementById("painel").style.display="block";
         } else {
-            error.innerText = "CHAVE INVÁLIDA!";
-            setTimeout(() => { error.innerText = ""; }, 3000);
+            localStorage.removeItem("keySalva");
+            localStorage.removeItem("tempoKey");
         }
     }
+}
 
-    function injetar() {
-        const btn = document.getElementById("injectBtn");
-        btn.innerText = "ESTABILIZANDO...";
-        btn.disabled = true;
-        btn.style.opacity = "0.6";
-        
-        setTimeout(() => {
-            btn.innerText = "CONFIGURAÇÕES ATIVAS!";
-            btn.style.background = "#00ff4c";
-            btn.style.color = "#000";
-            btn.style.opacity = "1";
-        }, 2000);
+function verificarKey(){
+    let key = document.getElementById("keyInput").value;
+
+    if(key === keyCorreta){
+        localStorage.setItem("keySalva", key);
+        localStorage.setItem("tempoKey", new Date().getTime());
+
+        document.getElementById("menuKey").style.display="none";
+        document.getElementById("painel").style.display="block";
+    } else {
+        document.getElementById("msg").innerText="KEY INCORRETA!";
     }
+}
+
+function gerarKey(){
+    window.open("https://fir3.net/Keyblackzin","_blank");
+}
+
+function mostrarSensi(){
+    let box = document.getElementById("sensiBox");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+function injetar(){
+    alert("Abrindo Free Fire...");
+}
+
+function logout(){
+    localStorage.removeItem("keySalva");
+    localStorage.removeItem("tempoKey");
+    location.reload();
+}
 </script>
 
 </body>
-  </html>
+</html>
