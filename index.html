@@ -62,7 +62,7 @@ a{color:white;text-decoration:none;}
     <h1>BLACKZIN CHEATS</h1>
 
     <div class="section">
-        <label>Digite sua Key:</label>
+        <label>Digite sua Key (16h → 16h):</label>
         <input type="password" id="keyInput" placeholder="Sua key">
     </div>
 
@@ -127,34 +127,33 @@ a{color:white;text-decoration:none;}
 </div>
 
 <script>
-// ===== LISTA DAS 50 KEYS =====
-let keysValidas = [
-"Key_A9xT2K31","Key_Mq7ZP804","Key_Wksni091","Key_XL92Psd1","Key_B7Rk39Q2",
-"Key_FT8m20Qa","Key_H29Ls8Qe","Key_J8PqA231","Key_N3ZK9mS4","Key_RP7x81WQ",
-"Key_U2Q9F1Ks","Key_S7L0MZ23","Key_8KQFZ210","Key_D2T7P1L9","Key_E9ZK72WP",
-"Key_CX21P9m8","Key_KQ9R7A12","Key_P0MZ9W8X","Key_73LZQ2F1","Key_9TQ1X7KZ",
-"Key_AK72M9Q1","Key_QP8F2L90","Key_Z1W9X7QK","Key_4M8Z1LQ9","Key_R2X9F7M1",
-"Key_S8P0L9QX","Key_WP29Z1M8","Key_9FQ1KZ72","Key_X1Z8L9P7","Key_K8Q9M2F1",
-"Key_MQ7P1Z8L","Key_1ZP9KX8Q","Key_29KZ8M1Q","Key_Q7LZ1X9P","Key_0P8KZQ19",
-"Key_XQ9M17Z8","Key_ZQ8P1M9X","Key_K1Z9P8Q7","Key_M8QZ19XP","Key_QZ91KP8M",
-"Key_P9Z8M1QX","Key_X8Q9ZP1M","Key_KZP9X18Q","Key_7QZ8MP19","Key_8Z1QK9XP",
-"Key_PQ9M1XZ8","Key_1QZP9X8M","Key_XM8Z9Q1P","Key_Q9XP1MZ8"
-];
+// ===== KEY 16H =====
+let keyValida = "Key_16H_Q7X9M2A4";
+let tempo24h = 24 * 60 * 60 * 1000;
 
-// se já estiver logado
+// quando abrir
 window.onload = function(){
     let keySalva = localStorage.getItem("keySalva");
-    if(keysValidas.includes(keySalva)){
-        menuKey.style.display="none";
-        painel.style.display="block";
+    let horaLogin = localStorage.getItem("horaLogin");
+
+    if(keySalva === keyValida && horaLogin){
+        let agora = new Date().getTime();
+        if(agora - horaLogin < tempo24h){
+            menuKey.style.display="none";
+            painel.style.display="block";
+        } else {
+            localStorage.clear();
+        }
     }
 }
 
 function verificarKey(){
     let key = document.getElementById("keyInput").value;
+    let agora = new Date().getTime();
 
-    if(keysValidas.includes(key)){
+    if(key === keyValida){
         localStorage.setItem("keySalva", key);
+        localStorage.setItem("horaLogin", agora);
         menuKey.style.display="none";
         painel.style.display="block";
     } else {
@@ -196,5 +195,4 @@ function logout(){
 </script>
 
 </body>
-        </html>
-        
+</html>
