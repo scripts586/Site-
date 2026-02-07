@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>BLACKZIN CHEATS PAINEL V3</title>
+<title>BLACKZIN CHEATS PAINEL V5</title>
 
 <style>
 body{
@@ -11,7 +11,6 @@ body{
     background:#000;
     color:white;
 }
-
 .container{
     max-width:360px;
     margin:30px auto;
@@ -20,23 +19,20 @@ body{
     border-radius:15px;
     box-shadow:0 0 15px red;
 }
-
 h1,h2{
     text-align:center;
     color:red;
     text-shadow:0 0 10px red;
 }
-
 .section{
     border:2px solid red;
     border-radius:12px;
     padding:10px;
     margin-bottom:12px;
 }
-
 button{
     width:100%;
-    padding:15px;
+    padding:14px;
     background:red;
     border:none;
     color:white;
@@ -44,9 +40,7 @@ button{
     border-radius:12px;
     margin-top:10px;
     cursor:pointer;
-    box-shadow:0 0 10px red;
 }
-
 input, select{
     width:100%;
     padding:10px;
@@ -54,177 +48,153 @@ input, select{
     border-radius:8px;
     border:none;
 }
-
-#painel, #sensiBox{
+#painel, #sensiBox, #dpiBox{
     display:none;
 }
-
-.value{
-    color:red;
-    float:right;
-}
-
-a{
-    color:white;
-    text-decoration:none;
-}
+a{color:white;text-decoration:none;}
 </style>
 </head>
 
 <body>
 
-<!-- MENU KEY -->
+<!-- LOGIN KEY -->
 <div class="container" id="menuKey">
     <h1>BLACKZIN CHEATS</h1>
 
     <div class="section">
         <label>Digite sua Key:</label>
-        <input type="password" id="keyInput" placeholder="Digite a key">
+        <input type="password" id="keyInput" placeholder="Sua key">
     </div>
 
-    <button onclick="verificarKey()">VALIDAR KEY</button>
-    <button onclick="gerarKey()">GERAR KEY</button>
+    <button onclick="verificarKey()">ENTRAR</button>
 
     <p id="msg" style="text-align:center;color:red;"></p>
 
     <div class="section">
-        <h2>🌐 Idioma</h2>
-        <select>
-            <option>Português</option>
-            <option>English</option>
-        </select>
-    </div>
-
-    <div class="section">
-        <h2>ℹ️ Informações</h2>
-        <p>Versão: V3.0</p>
+        <p>Versão: V5.0</p>
         <p>Créditos: BLACKZIN</p>
         <p>
             Discord:
-            <a href="https://discord.gg/EsWb49X5UC" target="_blank">
-                Entrar no servidor
-            </a>
+            <a href="https://discord.gg/EsWb49X5UC" target="_blank">Entrar no servidor</a>
         </p>
     </div>
 </div>
 
 <!-- PAINEL -->
 <div class="container" id="painel">
-    <h1>BLACKZIN CHEATS PAINEL V3</h1>
+    <h1>BLACKZIN CHEATS PAINEL V5</h1>
 
     <div class="section">
-        <label><input type="checkbox"> Ativar Auxílio</label>
-    </div>
-
-    <div class="section">
-        <label><input type="checkbox"> Auxílio Extra</label>
-    </div>
-
-    <div class="section">
+        <label><input type="checkbox"> Ativar Auxílio</label><br>
+        <label><input type="checkbox"> Auxílio Extra</label><br>
         <label><input type="checkbox"> Ativar FOV</label>
     </div>
 
     <div class="section">
-        Campo de visão: <span class="value">5</span>
-        <input type="range" min="1" max="10" value="5"
-        oninput="this.previousElementSibling.innerText=this.value">
-    </div>
-
-    <div class="section">
-        Tipo de Auxílio:
-        <select>
-            <option>Cabeça Auxiliar</option>
-            <option>Peito</option>
-            <option>Corpo</option>
+        <h2>📱 Escolha seu celular</h2>
+        <select id="modelo" onchange="mostrarSensi()">
+            <option value="">Selecione</option>
+            <option value="samsung">Samsung / Xiaomi</option>
+            <option value="motorola">Motorola</option>
+            <option value="iphone">iPhone</option>
+            <option value="fraco">Celular Fraco</option>
+            <option value="forte">Celular Forte</option>
         </select>
     </div>
 
-    <div class="section">
-        <button onclick="mostrarSensi()">📌 MOSTRAR SENSI</button>
-    </div>
-
     <div class="section" id="sensiBox">
-        <h2>SENSI RECOMENDADA</h2>
-        <p>🎯 Geral: 95%</p>
-        <p>🔫 Red Dot: 90%</p>
-        <p>🔭 Mira 2x: 85%</p>
-        <p>🔭 Mira 4x: 75%</p>
-        <p>🎯 AWM: 60%</p>
-        <p>📱 DPI: 600 - 700</p>
+        <h2>SENSI IDEAL</h2>
+        <div id="sensiResultado"></div>
     </div>
 
-    <button onclick="injetar()">INJETAR FUNÇÕES NO JOGO</button>
+    <button onclick="gerarDPI()">📱 GERAR DPI IDEAL</button>
+
+    <div class="section" id="dpiBox">
+        <h2>DPI RECOMENDADO</h2>
+        <p id="dpiResultado"></p>
+    </div>
 
     <div class="section">
-        <h2>ℹ️ Info</h2>
-        <p>Versão: V3.0</p>
+        <p>Versão: V5.0</p>
         <p>Créditos: BLACKZIN</p>
         <p>
             Discord:
-            <a href="https://discord.gg/EsWb49X5UC" target="_blank">
-                Entrar no servidor
-            </a>
+            <a href="https://discord.gg/EsWb49X5UC" target="_blank">Entrar no servidor</a>
         </p>
     </div>
 
-    <button onclick="logout()">SAIR / RESETAR KEY</button>
+    <button onclick="logout()">SAIR</button>
 </div>
 
 <script>
-let keyCorreta = "BLACKZIN123";
-let tempoExpiracao = 24 * 60 * 60 * 1000; // 24h
+// ===== LISTA DAS 50 KEYS =====
+let keysValidas = [
+"Key_A9xT2K31","Key_Mq7ZP804","Key_Wksni091","Key_XL92Psd1","Key_B7Rk39Q2",
+"Key_FT8m20Qa","Key_H29Ls8Qe","Key_J8PqA231","Key_N3ZK9mS4","Key_RP7x81WQ",
+"Key_U2Q9F1Ks","Key_S7L0MZ23","Key_8KQFZ210","Key_D2T7P1L9","Key_E9ZK72WP",
+"Key_CX21P9m8","Key_KQ9R7A12","Key_P0MZ9W8X","Key_73LZQ2F1","Key_9TQ1X7KZ",
+"Key_AK72M9Q1","Key_QP8F2L90","Key_Z1W9X7QK","Key_4M8Z1LQ9","Key_R2X9F7M1",
+"Key_S8P0L9QX","Key_WP29Z1M8","Key_9FQ1KZ72","Key_X1Z8L9P7","Key_K8Q9M2F1",
+"Key_MQ7P1Z8L","Key_1ZP9KX8Q","Key_29KZ8M1Q","Key_Q7LZ1X9P","Key_0P8KZQ19",
+"Key_XQ9M17Z8","Key_ZQ8P1M9X","Key_K1Z9P8Q7","Key_M8QZ19XP","Key_QZ91KP8M",
+"Key_P9Z8M1QX","Key_X8Q9ZP1M","Key_KZP9X18Q","Key_7QZ8MP19","Key_8Z1QK9XP",
+"Key_PQ9M1XZ8","Key_1QZP9X8M","Key_XM8Z9Q1P","Key_Q9XP1MZ8"
+];
 
-// verificar key salva ao abrir
+// se já estiver logado
 window.onload = function(){
     let keySalva = localStorage.getItem("keySalva");
-    let tempoSalvo = localStorage.getItem("tempoKey");
-
-    if(keySalva && tempoSalvo){
-        let agora = new Date().getTime();
-
-        if(agora - tempoSalvo < tempoExpiracao){
-            document.getElementById("menuKey").style.display="none";
-            document.getElementById("painel").style.display="block";
-        } else {
-            localStorage.removeItem("keySalva");
-            localStorage.removeItem("tempoKey");
-        }
+    if(keysValidas.includes(keySalva)){
+        menuKey.style.display="none";
+        painel.style.display="block";
     }
 }
 
 function verificarKey(){
     let key = document.getElementById("keyInput").value;
 
-    if(key === keyCorreta){
+    if(keysValidas.includes(key)){
         localStorage.setItem("keySalva", key);
-        localStorage.setItem("tempoKey", new Date().getTime());
-
-        document.getElementById("menuKey").style.display="none";
-        document.getElementById("painel").style.display="block";
+        menuKey.style.display="none";
+        painel.style.display="block";
     } else {
-        document.getElementById("msg").innerText="KEY INCORRETA!";
+        msg.innerText = "KEY INCORRETA!";
     }
 }
 
-function gerarKey(){
-    window.open("https://fir3.net/Keyblackzin","_blank");
-}
-
 function mostrarSensi(){
+    let modelo = document.getElementById("modelo").value;
     let box = document.getElementById("sensiBox");
-    box.style.display = box.style.display === "none" ? "block" : "none";
+    let res = document.getElementById("sensiResultado");
+
+    box.style.display="block";
+
+    if(modelo==="samsung"){
+        res.innerHTML="🎯 Geral: 95%<br>🔫 Red Dot: 90%<br>🔭 2x: 85%<br>🔭 4x: 75%<br>🎯 AWM: 60%";
+    } else if(modelo==="motorola"){
+        res.innerHTML="🎯 Geral: 90%<br>🔫 Red Dot: 85%<br>🔭 2x: 80%<br>🔭 4x: 70%<br>🎯 AWM: 55%";
+    } else if(modelo==="iphone"){
+        res.innerHTML="🎯 Geral: 85%<br>🔫 Red Dot: 80%<br>🔭 2x: 75%<br>🔭 4x: 65%<br>🎯 AWM: 50%";
+    } else if(modelo==="fraco"){
+        res.innerHTML="🎯 Geral: 80%<br>🔫 Red Dot: 75%<br>🔭 2x: 70%<br>🔭 4x: 60%<br>🎯 AWM: 45%";
+    } else if(modelo==="forte"){
+        res.innerHTML="🎯 Geral: 100%<br>🔫 Red Dot: 95%<br>🔭 2x: 90%<br>🔭 4x: 85%<br>🎯 AWM: 70%";
+    }
 }
 
-function injetar(){
-    alert("Abrindo Free Fire...");
+function gerarDPI(){
+    let dpis=[450,500,550,600,650,700];
+    let dpi=dpis[Math.floor(Math.random()*dpis.length)];
+    document.getElementById("dpiResultado").innerText="DPI ideal para você: "+dpi;
+    document.getElementById("dpiBox").style.display="block";
 }
 
 function logout(){
-    localStorage.removeItem("keySalva");
-    localStorage.removeItem("tempoKey");
+    localStorage.clear();
     location.reload();
 }
 </script>
 
 </body>
-</html>
+        </html>
+        
